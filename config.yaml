@@ -1,0 +1,35 @@
+system:
+  camera_index: 0
+  resolution: [640, 480]
+  show_fps: true
+
+modules:
+  detector: "yolo" # Options: contour, yolo, sam
+  tracker: "opencv" # Options: centroid, opencv
+  distance: "reference" # Options: reference, depth_anything
+
+detector_settings:
+  contour:
+    threshold_min: 100
+    threshold_max: 255
+    min_area: 500
+  yolo:
+    model_path: "yolov8n.pt"
+    confidence: 0.5
+  sam:
+    checkpoint: "d:/hakaton/sam2_repo/checkpoints/sam2.1_hiera_small.pt"
+    model_config: "configs/sam2.1/sam2.1_hiera_s.yaml"
+
+tracker_settings:
+  centroid:
+    max_disappeared: 50
+  opencv:
+    tracker_type: "csrt" # kcf, csrt, mil
+
+distance_settings:
+  reference:
+    known_width_cm: 15.0 # Width of object in real world
+    focal_length: 500.0 # Pixel focal length (needs calibration)
+  depth_anything:
+    model: "LiheYoung/depth-anything-small-hf"
+
